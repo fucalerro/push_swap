@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/11 17:21:26 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/11 18:32:25 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,17 @@
 --------------------------- structures ---------------------------
 */
 
+typedef struct s_num
+{
+	int				num;
+	int				index;
+}					t_num;
+
 typedef struct s_stack
 {
 	int				size;
-	int				*array;
+	t_num			*array;
 }					t_stack;
-
 
 
 /*
@@ -72,5 +77,8 @@ void	rr(t_stack *a, t_stack *b);
 void	rra(t_stack *a);
 void	rrb(t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
+void	radix_sort(t_stack *a, t_stack *b);
+void	get_index(t_stack *a);
+
 
 #endif

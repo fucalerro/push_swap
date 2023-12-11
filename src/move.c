@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 14:51:44 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/11 17:16:41 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/11 18:18:26 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	sa(t_stack *a)
 
 	if (a->size >= 2)
 	{
-		temp = a->array[0];
-		a->array[0] = a->array[1];
-		a->array[1] = temp;
+		temp = a->array[0].num;
+		a->array[0].num = a->array[0].num;
+		a->array[0].num = temp;
 	}
 	ft_printf("sa\n");
 }
@@ -31,9 +31,9 @@ void	sb(t_stack *b)
 
 	if (b->size >= 2)
 	{
-		temp = b->array[0];
-		b->array[0] = b->array[1];
-		b->array[1] = temp;
+		temp = b->array[0].num;
+		b->array[0].num = b->array[0].num;
+		b->array[0].num = temp;
 	}
 	ft_printf("sb\n");
 }
@@ -45,15 +45,15 @@ void	ss(t_stack *a, t_stack *b)
 
 	if (a->size >= 2)
 	{
-		temp_a = a->array[0];
-		a->array[0] = a->array[1];
-		a->array[1] = temp_a;
+		temp_a = a->array[0].num;
+		a->array[0].num = a->array[0].num;
+		a->array[0].num = temp_a;
 	}
 	if (b->size >= 2)
 	{
-		temp_b = b->array[0];
-		b->array[0] = b->array[1];
-		b->array[1] = temp_b;
+		temp_b = b->array[0].num;
+		b->array[0].num = b->array[0].num;
+		b->array[0].num = temp_b;
 	}
 	ft_printf("ss\n");
 }
@@ -65,11 +65,11 @@ void	pa(t_stack *b, t_stack *a)
 
 	i = a->size;
 	while (--i >= 0)
-		a->array[i + 1] = a->array[i];
-	a->array[0] = b->array[0];
+		a->array[i + 1].num = a->array[i].num;
+	a->array[0].num = b->array[0].num;
 	i = -1;
 	while (++i < b->size)
-		b->array[i] = b->array[i + 1];
+		b->array[i].num = b->array[i + 1].num;
 	b->size--;
 	a->size++;
 	ft_printf("pa\n");
@@ -82,11 +82,11 @@ void	pb(t_stack *b, t_stack *a)
 
 	i = b->size;
 	while (--i >= 0)
-		b->array[i + 1] = b->array[i];
-	b->array[0] = a->array[0];
+		b->array[i + 1].num = b->array[i].num;
+	b->array[0].num = a->array[0].num;
 	i = -1;
 	while (++i < a->size)
-		a->array[i] = a->array[i + 1];
+		a->array[i].num = a->array[i + 1].num;
 	a->size--;
 	b->size++;
 	ft_printf("pa\n");
@@ -97,12 +97,12 @@ void	ra(t_stack *a)
 	int	i;
 	int	temp;
 
-	temp = a->array[a->size];
-	a->array[a->size] = a->array[0];
+	temp = a->array[a->size].num;
+	a->array[a->size].num = a->array[0].num;
 	i = -1;
 	while (++i < a->size)
-		a->array[i] = a->array[i + 1];
-	a->array[i] = temp;
+		a->array[i].num = a->array[i + 1].num;
+	a->array[i].num = temp;
 	ft_printf("ra\n");
 }
 
@@ -111,12 +111,12 @@ void	rb(t_stack *b)
 	int	i;
 	int	temp;
 
-	temp = b->array[b->size];
-	b->array[b->size] = b->array[0];
+	temp = b->array[b->size].num;
+	b->array[b->size].num = b->array[0].num;
 	i = -1;
 	while (++i < b->size)
-		b->array[i] = b->array[i + 1];
-	b->array[i] = temp;
+		b->array[i].num = b->array[i + 1].num;
+	b->array[i].num = temp;
 	ft_printf("rb\n");
 }
 
@@ -126,18 +126,18 @@ void	rr(t_stack *a, t_stack *b)
 	int	temp_a;
 	int	temp_b;
 
-	temp_a = a->array[a->size];
-	a->array[a->size] = a->array[0];
+	temp_a = a->array[a->size].num;
+	a->array[a->size].num = a->array[0].num;
 	i = -1;
 	while (++i < a->size)
-		a->array[i] = a->array[i + 1];
-	a->array[i] = temp_a;
-	temp_b = b->array[b->size];
-	b->array[b->size] = b->array[0];
+		a->array[i].num = a->array[i + 1].num;
+	a->array[i].num = temp_a;
+	temp_b = b->array[b->size].num;
+	b->array[b->size].num = b->array[0].num;
 	i = -1;
 	while (++i < b->size)
-		b->array[i] = b->array[i + 1];
-	b->array[i] = temp_b;
+		b->array[i].num = b->array[i + 1].num;
+	b->array[i].num = temp_b;
 	ft_printf("rr\n");
 }
 
@@ -146,12 +146,12 @@ void	rra(t_stack *a)
 	int	i;
 	int	temp;
 
-	temp = a->array[0];
-	a->array[0] = a->array[a->size - 1];
+	temp = a->array[0].num;
+	a->array[0].num = a->array[a->size - 1].num;
 	i = a->size;
 	while (--i > 1)
-		a->array[i] = a->array[i - 1];
-	a->array[1] = temp;
+		a->array[i].num = a->array[i - 1].num;
+	a->array[0].num = temp;
 	ft_printf("rra\n");
 }
 
@@ -160,12 +160,12 @@ void	rrb(t_stack *b)
 	int	i;
 	int	temp;
 
-	temp = b->array[0];
-	b->array[0] = b->array[b->size - 1];
+	temp = b->array[0].num;
+	b->array[0].num = b->array[b->size - 1].num;
 	i = b->size;
 	while (--i > 1)
-		b->array[i] = b->array[i - 1];
-	b->array[1] = temp;
+		b->array[i].num = b->array[i - 1].num;
+	b->array[0].num = temp;
 	ft_printf("rrb\n");
 }
 
@@ -175,18 +175,18 @@ void	rrr(t_stack *a, t_stack *b)
 	int	temp_a;
 	int	temp_b;
 
-	temp_a = a->array[0];
-	a->array[0] = a->array[a->size - 1];
+	temp_a = a->array[0].num;
+	a->array[0].num = a->array[a->size - 1].num;
 	i = a->size;
 	while (--i > 1)
-		a->array[i] = a->array[i - 1];
-	a->array[1] = temp_a;
-	temp_b = b->array[0];
-	b->array[0] = b->array[b->size - 1];
+		a->array[i].num = a->array[i - 1].num;
+	a->array[0].num = temp_a;
+	temp_b = b->array[0].num;
+	b->array[0].num = b->array[b->size - 1].num;
 	i = b->size;
 	while (--i > 1)
-		b->array[i] = b->array[i - 1];
-	b->array[1] = temp_b;
+		b->array[i].num = b->array[i - 1].num;
+	b->array[0].num = temp_b;
 	ft_printf("rrr\n");
 }
 
@@ -196,9 +196,9 @@ void	rrr(t_stack *a, t_stack *b)
 
 // 	if (stack->size >= 2)
 // 	{
-// 		temp = stack->array[0];
-// 		stack->array[0] = stack->array[1];
-// 		stack->array[1] = temp;
+// 		temp = stack->array[0].num;
+// 		stack->array[0].num = stack->array[0].num;
+// 		stack->array[0].num = temp;
 // 	}
 // 	ft_printf("%s", str);
 // }
@@ -217,11 +217,11 @@ void	rrr(t_stack *a, t_stack *b)
 
 // 	i = to->size;
 // 	while (--i >= 0)
-// 		to->array[i + 1] = to->array[i];
-// 	to->array[0] = from->array[0];
+// 		to->array[i + 1].num = to->array[i].num;
+// 	to->array[0].num = from->array[0].num;
 // 	i = -1;
 // 	while (++i < from->size)
-// 		from->array[i] = from->array[i + 1];
+// 		from->array[i].num = from->array[i + 1].num;
 // 	from->size--;
 // 	to->size++;
 // 	ft_printf("%s", str);
@@ -235,20 +235,20 @@ void	rrr(t_stack *a, t_stack *b)
 // 	if (ft_strlen(str) == 2)
 // 	{
 // 		temp = stack->array[stack->size];
-// 		stack->array[stack->size] = stack->array[0];
+// 		stack->array[stack->size] = stack->array[0].num;
 // 		i = -1;
 // 		while (++i < stack->size)
-// 			stack->array[i] = stack->array[i + 1];
-// 		stack->array[i] = temp;
+// 			stack->array[i].num = stack->array[i + 1].num;
+// 		stack->array[i].num = temp;
 // 	}
 // 	else if (ft_strlen(str) == 3)
 // 	{
-// 		temp = stack->array[0];
-// 		stack->array[0] = stack->array[stack->size - 1];
+// 		temp = stack->array[0].num;
+// 		stack->array[0].num = stack->array[stack->size - 1];
 // 		i = stack->size;
 // 		while (--i > 1)
-// 			stack->array[i] = stack->array[i - 1];
-// 		stack->array[1] = temp;
+// 			stack->array[i].num = stack->array[i - 1].num;
+// 		stack->array[0].num = temp;
 // 	}
 // 	if (ft_strcmp(str, "rr") != 0 && ft_strcmp(str, "rrr") != 0)
 // 		ft_printf(str);

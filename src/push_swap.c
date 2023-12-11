@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:40:08 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/11 17:21:03 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/11 18:32:00 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,9 @@ void	stack_init(t_stack *a, char **argv, int size)
 	i = -1;
 	a->array = malloc(sizeof(int) * size + 1);
 	while (argv[++i])
-		a->array[i] = ft_atol(argv[i]);
+		a->array[i].num = ft_atol(argv[i]);
 	a->size = i;
 }
-
-
-void	sort_small(t_stack *a)
-{
-	if (a->array[0] > a->array[1])
-		sa(a);
-	if (a->array[1] > a->array[2])
-		rra(a);
-	if (a->array[0] > a->array[1])
-		sa(a);
-}
-
-void	sort_medium(t_stack *a)
-{
-
-}
-
-
-
-
-void	get_index(t_stack *a)
-{
-
-}
-
 
 
 int	main(int argc, char *argv[])
@@ -73,36 +48,15 @@ int	main(int argc, char *argv[])
 	while (argv[stacksize])
 		stacksize++;
 	stack_init(&a, argv, stacksize);
-	b.array = malloc(sizeof(int) * stacksize + 1);
+	b.array = malloc(sizeof(t_num) * stacksize + 1);
 	b.size = 0;
 
-	if (is_sorted(&a) == true)
-		return (0);
+	get_index(&a);
+	radix_sort(&a, &b);
 
-
-	if (a.size == 2)
-		sa(&a);
-	else if (a.size == 3)
-		sort_small(&a);
 
 	return (0);
 
 }
 
 
-/**
- * @brief Check if the stack is sorted
-
- * @param stack The stack to check
- * @return int true if the stack is sorted, false otherwise
- */
-int	is_sorted(t_stack *stack)
-{
-	int	i;
-
-	i = -1;
-	while (++i < stack->size - 1)
-		if (stack->array[i] > stack->array[i + 1])
-			return (false);
-	return (true);
-}
