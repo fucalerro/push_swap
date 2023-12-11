@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 10:18:59 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/05 15:46:49 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/11 09:18:54 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,7 @@ static long	ft_isspace(const char c)
 	return (0);
 }
 
-static long	checknbr(const char *strnbr)
-{
-	size_t	i;
-
-	i = 0;
-	while(strnbr[i])
-	{
-		if (strnbr[i] < '0' || strnbr[i] > '9')
-			return (-1);
-		i++;
-	}
-	return (0);
-}
-
-int	ft_atoi(const char *strnbr)
+int	ft_atoi(const char *nptr)
 {
 	size_t	i;
 	size_t	j;
@@ -43,23 +29,21 @@ int	ft_atoi(const char *strnbr)
 	i = 1;
 	j = 0;
 	k = 0;
-	while (ft_isspace(strnbr[j]) == 1)
+	while (ft_isspace(nptr[j]) == 1)
 		j++;
-	if (strnbr[j] == '+')
+	if (nptr[j] == '+')
 		j++;
-	else if (strnbr[j] == '-')
+	else if (nptr[j] == '-')
 	{
 		i = -1;
 		j++;
 	}
-	if (checknbr(strnbr) == -1)
-		return (-1);
-	while (strnbr[j] >= '0' && strnbr[j] <= '9')
-		k = k * 10 + strnbr[j++] - 48;
+	while (nptr[j] >= '0' && nptr[j] <= '9')
+		k = k * 10 + nptr[j++] - 48;
 	return (k * i);
 }
 
-long	ft_atol(const char *strnbr)
+long	ft_atol(const char *nptr)
 {
 	size_t	i;
 	size_t	j;
@@ -68,19 +52,17 @@ long	ft_atol(const char *strnbr)
 	i = 1;
 	j = 0;
 	k = 0;
-	while (ft_isspace(strnbr[j]) == 1)
+	while (ft_isspace(nptr[j]) == 1)
 		j++;
-	if (strnbr[j] == '+')
+	if (nptr[j] == '+')
 		j++;
-	else if (strnbr[j] == '-')
+	else if (nptr[j] == '-')
 	{
 		i = -1;
 		j++;
 	}
-	if (checknbr(strnbr) == -1)
-		return (-1);
-	while (strnbr[j] >= '0' && strnbr[j] <= '9')
-		k = k * 10 + strnbr[j++] - 48;
+	while (nptr[j] >= '0' && nptr[j] <= '9')
+		k = k * 10 + nptr[j++] - 48;
 	return (k * i);
 }
 

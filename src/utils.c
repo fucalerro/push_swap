@@ -6,13 +6,13 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 12:54:49 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/06 16:23:26 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/11 17:11:55 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_stack(t_stack *a, t_stack *b)
+void	print_stacks(t_stack *a, t_stack *b)
 {
 	int	i;
 
