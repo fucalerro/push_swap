@@ -1,28 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/08 12:31:37 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/05 13:59:16 by lferro           ###   ########.fr       */
+/*   Created: 2023/12/06 16:23:31 by lferro            #+#    #+#             */
+/*   Updated: 2023/12/06 18:51:26 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*current;
-
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	current = *lst;
-	while (current->next != 0)
-		current = current->next;
-	current->next = new;
-}

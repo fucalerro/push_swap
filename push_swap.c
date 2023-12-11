@@ -5,35 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 13:18:54 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/04 13:40:28 by lferro           ###   ########.fr       */
+/*   Created: 2023/12/05 18:40:08 by lferro            #+#    #+#             */
+/*   Updated: 2023/12/06 16:23:15 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int main(int argc, char const *argv[])
+void	stack_init(t_stack *a, char **argv, int size)
 {
-	// printf("%d\n", ft_atoi(argv[1]));
+	int		i;
 
-	int	nbr;
-	int	i;
-	
-	if (argc < 3)
-	{
-		printf("Error\nNot enough arguments.\n");
-		exit(0);
-	}
-	i = 0;
+	i = -1;
+	a->array = malloc(sizeof(t_num) * size + 1);
 	while (argv[++i])
-		if (ft_atoi(argv[i]) < 0)
-		{
-			printf("Error\nInvalid numbers\n");
-			exit(0);
-		}
+		a->array[i] = ft_atol(argv[i]);
+	a->size = i;
+}
 
+int	main(int argc, char *argv[])
+{
+	t_stack	a;
+	t_stack	b;
+	int		stacksize;
 
-
-		
-	return (0);
+	if (argc == 1 || (argc == 2 && !argv[1][0]))
+		return (1);
+	else if (argc == 2)
+		argv = ft_split(argv[1], ' ');
+	stacksize = 0;
+	while (argv[stacksize])
+		stacksize++;
+	stack_init(&a, argv, stacksize);
+	b.array = malloc(sizeof(int) * stacksize + 1);
+	b.size = 0;
+	push(&a, &b, "pb");
+	push(&a, &b, "pb");
+	push(&a, &b, "pb");
+	print_stack(&a, &b);
+	rr(&a, &b, "rrr");
+	print_stack(&a, &b);
+	rr(&a, &b, "rr");
+	print_stack(&a, &b);
 }
