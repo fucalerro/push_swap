@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/11 18:32:25 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/12 13:42:30 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,9 @@ void	rr(t_stack *a, t_stack *b);
 void	rra(t_stack *a);
 void	rrb(t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
-void	radix_sort(t_stack *a, t_stack *b);
+// void	radix_sort(t_stack *a, t_stack *b);
 void	get_index(t_stack *a);
+void	sort(t_stack *a, t_stack *b);
 
 
 #endif
