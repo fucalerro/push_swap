@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/12 13:42:30 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/12 13:53:40 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_num
 typedef struct s_stack
 {
 	int				size;
-	t_num			*array;
+	int				*array;
 }					t_stack;
 
 
@@ -53,30 +53,29 @@ typedef struct s_stack
 */
 
 void	print_stacks(t_stack *a, t_stack *b);
-void	print_stack(t_stack *a);
 int		is_sorted(t_stack *stack);
 
 /*
 old prototypes
  */
 
-// void	rotate(t_stack *stack, char *str);
-// void	rr(t_stack *a, t_stack *b, char *str);
-// void	push(t_stack *from, t_stack *to, char *str);
-// void	swap(t_stack *stack, char *str);
+void	rotate(t_stack *stack, char *str);
+void	rr(t_stack *a, t_stack *b, char *str);
+void	push(t_stack *from, t_stack *to, char *str);
+void	swap(t_stack *stack, char *str);
 
 void	stack_init(t_stack *a, char **argv, int size);
-void	sa(t_stack *a);
-void	sb(t_stack *b);
-void	ss(t_stack *a, t_stack *b);
-void	pa(t_stack *b, t_stack *a);
-void	pb(t_stack *a, t_stack *b);
-void	ra(t_stack *a);
-void	rb(t_stack *b);
-void	rr(t_stack *a, t_stack *b);
-void	rra(t_stack *a);
-void	rrb(t_stack *b);
-void	rrr(t_stack *a, t_stack *b);
+// void	sa(t_stack *a);
+// void	sb(t_stack *b);
+// void	ss(t_stack *a, t_stack *b);
+// void	pa(t_stack *b, t_stack *a);
+// void	pb(t_stack *a, t_stack *b);
+// void	ra(t_stack *a);
+// void	rb(t_stack *b);
+// void	rr(t_stack *a, t_stack *b);
+// void	rra(t_stack *a);
+// void	rrb(t_stack *b);
+// void	rrr(t_stack *a, t_stack *b);
 // void	radix_sort(t_stack *a, t_stack *b);
 void	get_index(t_stack *a);
 void	sort(t_stack *a, t_stack *b);

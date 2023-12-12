@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:23:31 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/12 11:44:03 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/12 14:51:53 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,42 @@
  *
  * @param a Stack with 3 numbers to sort numbers from
  */
-void	sort_small(t_stack *a)
-{
-	if (a->array[0].num > a->array[1].num)
-		sa(a);
-	if (a->array[1].num > a->array[2].num)
-		rra(a);
-	if (a->array[0].num > a->array[1].num)
-		sa(a);
-}
+// void	sort_small(t_stack *a)
+// {
+// 	if (a->array[0] > a->array[1]);
+// 		// sa(a);
+// 	if (a->array[1] > a->array[2]);
+// 		// rra(a);
+// 	if (a->array[0] > a->array[1]);
+// 		// sa(a);
+// }
 
 
 void	sort(t_stack *a, t_stack *b)
 {
 	int	i;
-	int	size;
+	// int	j;
 
-	size = a->size - 1;
+	int	size;
+	size = a->size;
+
 	i = 0;
-	while (i <= a->size)
+	while (is_sorted(a) == false)
 	{
+		printf("\nasize: %d\n", a->size);
 		print_stacks(a, b);
-		printf("number: %d	index: %d	size: %d\n", a->array[0].num , a->array[0].index, size);
-		if (a->array[0].index == size)
+		if (a->array[0] == i)
 		{
-			pb(a, b);
-			ra(a);
-			size--;
+			push(a, b, "pb");
+			i++;
 		}
 		else
-		{
-			ra(a);
-		}
-		i++;
+			rotate(a, "ra");
 	}
 	while (b->size != 0)
 	{
-		pa(b, a);
+		push(b, a, "pa");
+		printf("yoAIPFUNWOEIFUBWEOUIF\n");
 	}
 }
 
@@ -67,14 +66,14 @@ void	sort(t_stack *a, t_stack *b)
 // 	i = 0;
 // 	while (i <= a->size)
 // 	{
-// 		// if ((a->array[0].index & 1) == 0)
-// 		printf("i: %d	bit: %d\n", a->array[i].index, a->array[i].index & 1);
+// 		// if ((a->array[0] & 1) == 0)
+// 		printf("i: %d	bit: %d\n", a->array[i], a->array[i] & 1);
 // 			// pb(a, b);
 // 		// ra(a);
 // 		i++;
 
 // 	}
 // 	printf("asize: %d\n", a->size);
-// 	// if (a->array[i].index >> 1 == 0)
+// 	// if (a->array[i] >> 1 == 0)
 
 // }
