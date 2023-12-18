@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 14:51:44 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/12 14:13:07 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/18 11:25:34 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	swap(t_stack *stack, char *str)
 		stack->array[0] = stack->array[1];
 		stack->array[1] = temp;
 	}
-	ft_printf("%s", str);
+	ft_printf("%s\n", str);
 }
 
 void	push(t_stack *from, t_stack *to, char *str)
@@ -39,7 +39,7 @@ void	push(t_stack *from, t_stack *to, char *str)
 		from->array[i] = from->array[i + 1];
 	from->size--;
 	to->size++;
-	ft_printf("%s", str);
+	ft_printf("%s\n", str);
 }
 
 void	rotate(t_stack *stack, char *str)
@@ -66,7 +66,7 @@ void	rotate(t_stack *stack, char *str)
 		stack->array[1] = temp;
 	}
 	if (ft_strcmp(str, "rr") != 0 && ft_strcmp(str, "rrr") != 0)
-		ft_printf(str);
+		ft_printf("%s\n", str);
 }
 
 void	rr(t_stack *a, t_stack *b, char *str)
@@ -279,7 +279,7 @@ void	rr(t_stack *a, t_stack *b, char *str)
 // 		stack->array[0].index = stack->array[0].index;
 // 		stack->array[0].index = temp;
 // 	}
-// 	ft_printf("%s", str);
+// 	ft_printf("%s\n", str);
 // }
 
 // void	ss(t_stack *a, t_stack *b)
@@ -303,7 +303,7 @@ void	rr(t_stack *a, t_stack *b, char *str)
 // 		from->array[i].index = from->array[i + 1].index;
 // 	from->size--;
 // 	to->size++;
-// 	ft_printf("%s", str);
+// 	ft_printf("%s\n", str);
 // }
 
 // void	rotate(t_stack *stack, char *str)
