@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:40:08 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/18 11:27:03 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/18 17:14:11 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ int	main(int argc, char *argv[])
 	b.size = 0;
 
 	get_index(&a);
-	sort(&a, &b);
+	// sort(&a, &b);
+
+	turk_sort(&a, &b);
+	// printf("max of stack:	%d", get_max(&a));
 
 	// print_stacks(&a, &b);
 	// push(&a, &b, "pb");

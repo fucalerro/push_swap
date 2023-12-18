@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/18 10:44:13 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/18 18:20:20 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@
 #  define REVERSE	1
 #  define NORMAL	0
 
-#  define PS		(print_stacks(&a, &b))
+#  define PRINTSTACK		(print_stacks(a, b))
+
+#  define PL		printf("file: %s line: %d", __FILE__, __LINE__)
 
 /*
 --------------------------- structures ---------------------------
@@ -79,6 +81,12 @@ void	stack_init(t_stack *a, char **argv, int size);
 // void	radix_sort(t_stack *a, t_stack *b);
 void	get_index(t_stack *a);
 void	sort(t_stack *a, t_stack *b);
+int		get_max(t_stack *stack);
+void	turk_sort(t_stack *a, t_stack *b);
+void	bring_max_top(t_stack *stack);
+void	b_cheaper(t_stack *a, t_stack *b, int cost);
+int		get_min(t_stack *stack);
+
 
 
 #endif

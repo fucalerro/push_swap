@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 12:54:49 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/18 10:50:04 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/18 18:19:56 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,48 @@ void	get_index(t_stack *a)
 		j = -1;
 	}
 	i = 0;
-	while (i < a->size)
+		while (i < a->size)
 	{
 		a->array[i] = temp[i];
 		i++;
 	}
 	free(temp);
+}
+
+/**
+ * @brief Get the max item from a stack
+ *
+ * @param stack
+ * @return int
+ */
+int	get_max(t_stack *stack)
+{
+	int	max;
+	int	i;
+
+	i = 0;
+	max = stack->array[i];
+	while (i < stack->size - 1)
+	{
+		if (stack->array[i + 1] > max)
+			max = stack->array[i + 1];
+		i++;
+	}
+	return (max);
+}
+
+int	get_min(t_stack *stack)
+{
+	int	min;
+	int	i;
+
+	i = 0;
+	min = stack->array[i];
+	while (i < stack->size - 1)
+	{
+		if (stack->array[i + 1] < min)
+			min = stack->array[i + 1];
+		i++;
+	}
+	return (min);
 }
