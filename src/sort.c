@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:23:31 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/19 16:35:52 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/19 18:31:50 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,85 @@ int	which_rotate(t_stack *a, int index)
 }
 
 
-int	get_cost(int a_value, t_stack *b, int a_index)
+void	get_cost(t_stack *a, t_stack *b, t_cost **cost)
 {
-	t_cost	cost;
-
+	int	i;
 	int	bi;
-	int	bi2;
-	bi = 0;
 
-	while (bi < b->size)
+	i = 0;
+	bi = b->size - 1;
+
+	while (i < a->size && bi > 0)
 	{
-		bi2 = bi2 - 1;
-		if (bi == 0)
-			bi2 == b->size - 1;
-		if (a_value > b->array[bi] && a_value < b->array[bi2])
+		bi = b->size - 1;
+		while (bi > 0 && a->array[i] > b->array[bi])
+		{
+			cost[i]->rrb++;
+			bi--;
+		}
+		cost[i]->ra = i;
+		if (cost[i]->rrb > b->size / 2)
+		{
+			cost[i]->rb = b->size - cost[i]->rrb;
+			cost[i]->rrb = 0;
+		}
+		cost[i]->ra = i;
+		i++;
+	}
+	// cost[i]->ra = i;
+	// PRINTSTACK;
+}
 
 
+void	sort(t_stack *a, t_stack *b)
+{
+	t_cost *cost;
+
+	cost = malloc(sizeof(t_cost) * a->size);
+
+	push(a, b, "pbbb");
+	push(a, b, "pbbb");
+	push(a, b, "pbbb");
+	push(a, b, "pbbb");
+	push(a, b, "pbbb");
+
+	// PRINTSTACK;
+
+	int i = 0;
+	while (i < a->size)
+	{
+		if (a->array[i] > get_max(b))
+			push(a, b, "pb");
+		if (a->array[i] < get_min(b))
+		{
+			push(a, b, "pb");
+			rotate(b, "rb");
+		}
+		else
+		{
+			PRINTSTACK;
+			get_cost(a, b, &cost);
+			PRINTSTACK;
+
+
+			for (int i = 0; i < a->size; i++)
+			{
+				printf("\nra cost: %d\n rb cost: %d\nrra cost: %d\nrrb cost: %d\n\n",cost[i].ra, cost[i].rb, cost[i].rra, cost[i].rrb);
+			}
+		}
+		i++;
+		// PRINTSTACK;
 	}
 
 
 
-	cost = a_index + b_index;
+
+
+
 }
+
+
+
 
 
 void	turk_sort(t_stack *a, t_stack *b)

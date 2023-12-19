@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/19 16:24:08 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/19 17:48:37 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 #  define PRINTSTACK		(print_stacks(a, b))
 
-#  define PL		printf("file: %s line: %d", __FILE__, __LINE__)
+#  define PL		printf("file: %s line: %d\n", __FILE__, __LINE__)
 
 /*
 --------------------------- structures ---------------------------
@@ -52,6 +52,11 @@ typedef struct s_cost
 	int				rra;
 	int				rrb;
 }					t_cost;
+
+// typedef struct s_costs
+// {
+// 	t_cost			*costs;
+// }					t_costs;
 
 typedef struct s_stack
 {
