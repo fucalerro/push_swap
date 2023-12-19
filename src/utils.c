@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 12:54:49 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/18 18:19:56 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/19 11:15:26 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	is_sorted(t_stack *stack)
  *
  * @param a stack to get indexes from
  */
-void	get_index(t_stack *a)
+void	change_to_index(t_stack *a)
 {
 	int	i;
 	int	j;

@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/18 18:20:20 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/19 16:24:08 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 #  include <stdlib.h>
 #  include <string.h>
 #  include <unistd.h>
+#  include <limits.h>
+
 
 #  define REVERSE	1
 #  define NORMAL	0
@@ -43,6 +45,14 @@ typedef struct s_num
 	int				index;
 }					t_num;
 
+typedef struct s_cost
+{
+	int				ra;
+	int				rb;
+	int				rra;
+	int				rrb;
+}					t_cost;
+
 typedef struct s_stack
 {
 	int				size;
@@ -50,7 +60,7 @@ typedef struct s_stack
 }					t_stack;
 
 
-/*`
+/*
 -------------------------- prototypes --------------------------
 */
 
@@ -79,7 +89,7 @@ void	stack_init(t_stack *a, char **argv, int size);
 // void	rrb(t_stack *b);
 // void	rrr(t_stack *a, t_stack *b);
 // void	radix_sort(t_stack *a, t_stack *b);
-void	get_index(t_stack *a);
+void	change_to_index(t_stack *a);
 void	sort(t_stack *a, t_stack *b);
 int		get_max(t_stack *stack);
 void	turk_sort(t_stack *a, t_stack *b);
