@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:23:31 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/20 20:13:06 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/20 20:55:57 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,44 +98,50 @@ int	get_min_nbr(int a, int b)
 
 void	get_total_cost(t_cost **cost, int i)
 {
-	int	rr;
-	int	rrr;
-	int ra;
-	int rb;
-	int rra;
-	int rrb;
-
-	rr = 0;
-	rrr = 0;
-	ra = 0;
-	rb = 0;
-	rra = 0;
-	rrb = 0;
+	(*cost)[i].final_rr = 0;
+	(*cost)[i].final_rrr = 0;
+	(*cost)[i].final_ra = 0;
+	(*cost)[i].final_rb = 0;
+	(*cost)[i].final_rra = 0;
+	(*cost)[i].final_rrb = 0;
 
 	if ((*cost)[i].ra > 0 && (*cost)[i].rb > 0)
 	{
-		rr = get_min_nbr((*cost)[i].ra, (*cost)[i].rb);
+		(*cost)[i].final_rr = get_min_nbr((*cost)[i].ra, (*cost)[i].rb);
 	}
 	else if ((*cost)[i].rra > 0 && (*cost)[i].rrb > 0)
 	{
-		rrr = get_min_nbr((*cost)[i].rra, (*cost)[i].rrb);
+		(*cost)[i].final_rrr = get_min_nbr((*cost)[i].rra, (*cost)[i].rrb);
 	}
 
 	if ((*cost)[i].ra > (*cost)[i].rb)
-		ra = (*cost)[i].ra - (*cost)[i].rb;
+		(*cost)[i].final_ra = (*cost)[i].ra - (*cost)[i].rb;
 	else
-		rb = (*cost)[i].rb - (*cost)[i].ra;
+		(*cost)[i].final_rb = (*cost)[i].rb - (*cost)[i].ra;
 	if ((*cost)[i].rra > (*cost)[i].rrb)
-		ra = (*cost)[i].rra - (*cost)[i].rrb;
+		(*cost)[i].final_ra = (*cost)[i].rra - (*cost)[i].rrb;
 	else
-		rrb = (*cost)[i].rrb - (*cost)[i].rra;
+		(*cost)[i].final_rrb = (*cost)[i].rrb - (*cost)[i].rra;
 
-	(*cost)[i].total_cost = rr + rrr + ra + rb + rrb + rra;
+	(*cost)[i].total_cost = (*cost)[i].final_rr + (*cost)[i].final_rrr + (*cost)[i].final_ra + (*cost)[i].final_rb + (*cost)[i].final_rrb + (*cost)[i].final_rra;
 
 	// printf("ra: %d rb: %d rra: %d rrb: %d rr: %d rrr: %d\n", ra, rb, rra, rrb, rr, rrr);
 }
 
 
+void	reset_cost(t_cost **cost, t_stack *a)
+{
+	int i = 0;
+	while (i < a->size)
+	{
+		(*cost)[i].ra = 0;
+		(*cost)[i].rb = 0;
+		(*cost)[i].rra = 0;
+		(*cost)[i].rrb = 0;
+
+		i++;
+	}
+}
 
 void	sort(t_stack *a, t_stack *b)
 {
@@ -144,24 +150,25 @@ void	sort(t_stack *a, t_stack *b)
 
 	cost = malloc(sizeof(t_cost) * a->size);
 
-	push(a, b, "pbbb");
-	push(a, b, "pbbb");
-	push(a, b, "pbbb");
-	push(a, b, "pbbb");
-	push(a, b, "pbbb");
-	push(a, b, "pbbb");
-	push(a, b, "pbbb");
-	push(a, b, "pbbb");
-	push(a, b, "pbbb");
-	push(a, b, "pbbb");
+	// push(a, b, "pbbb");
+	// push(a, b, "pbbb");
+	// push(a, b, "pbbb");
+	// push(a, b, "pbbb");
+	// push(a, b, "pbbb");
+	// push(a, b, "pbbb");
+	// push(a, b, "pbbb");
+	// push(a, b, "pbbb");
+	// push(a, b, "pbbb");
+	// push(a, b, "pbbb");
 
 	PRINTSTACK;
 
 	int	cheapest;
 
 	int i = 0;
-	while (i < 3)
+	while (a->size > 0)
 	{
+		bring_max_top(b);
 		if (a->array[0] > get_max(b))
 		{
 			push(a, b, "pb");
@@ -177,35 +184,69 @@ void	sort(t_stack *a, t_stack *b)
 		{
 			get_cost(a, b, &cost);
 
-
 			cheapest = get_index_min_value(&cost, a);
-			
+
+			make_move(a, b, cost);
+
+			reset_cost(&cost, a);
 
 
-
-
-
-
-			for (int i = 0; i < a->size; i++)
-			{
-				printf("cost index: %d	ra cost: %d\n", i, cost[i].ra);
-				printf("cost index: %d	rb cost: %d\n", i, cost[i].rb);
-				printf("cost index: %d	rra cost: %d\n", i, cost[i].rra);
-				printf("cost index: %d	rrb cost: %d\n", i, cost[i].rrb);
-				printf("cost index: %d	total cost: %d\n\n", i, cost[i].total_cost);
-			}
+			// for (int i = 0; i < a->size; i++)
+			// {
+			// 	printf("cost index: %d	ra cost: %d\n", i, cost[i].ra);
+			// 	printf("cost index: %d	rb cost: %d\n", i, cost[i].rb);
+			// 	printf("cost index: %d	rra cost: %d\n", i, cost[i].rra);
+			// 	printf("cost index: %d	rrb cost: %d\n", i, cost[i].rrb);
+			// 	printf("cost index: %d	total cost: %d\n\n", i, cost[i].total_cost);
+			// }
 		}
 		i++;
 		// PRINTSTACK;
 	}
+		bring_max_top(b);
 
-
-
-
-
+		while (b->size > 0)
+			push(b, a, "pa");
+		PRINTSTACK;
 
 }
 
+void	make_move(t_stack *a, t_stack *b, t_cost *cost)
+{
+	while (cost->final_ra != 0)
+	{
+		rotate(a, "ra");
+		cost->final_ra--;
+	}
+	while (cost->final_rb != 0)
+	{
+		rotate(b, "rb");
+		cost->final_rb--;
+	}
+	while (cost->final_rra != 0)
+	{
+		rotate(a, "rra");
+		cost->final_rra--;
+	}
+	while (cost->final_rrb != 0)
+	{
+		rotate(b, "rrb");
+		cost->final_rrb--;
+	}
+	while (cost->final_rr != 0)
+	{
+		rr(a, b, "rr");
+		cost->final_rr--;
+	}
+	while (cost->final_rrr != 0)
+	{
+		rr(a, b, "rrr");
+		cost->final_rrr--;
+	}
+	PRINTSTACK;
+	push(a, b, "PB");
+	PRINTSTACK;
+}
 
 int	get_index_min_value(t_cost **cost, t_stack *a)
 {
@@ -217,8 +258,8 @@ int	get_index_min_value(t_cost **cost, t_stack *a)
 	i = -1;
 	while (++i < a->size)
 	{
-		if (cost[i]->total_cost < min)
-			min = cost[i]->total_cost;
+		if ((*cost)[i].total_cost < min)
+			min = (*cost)[i].total_cost;
 	}
 	return (i);
 }
@@ -462,20 +503,19 @@ void	bring_max_top(t_stack *stack)
 
 	max = get_max(stack);
 
-
 	max_index = get_index(stack, max);
 	if (max_index < stack->size / 2)
 	{
 		while (stack->array[0] != max)
 		{
-			rotate(stack, "rb");
+			rotate(stack, "RB");
 		}
 	}
 	else
 	{
 		while (stack->array[0] != max)
 		{
-			rotate(stack, "rrb");
+			rotate(stack, "RRB");
 		}
 	}
 }
