@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/19 17:48:37 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/20 20:13:26 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,13 @@ typedef struct s_cost
 	int				rb;
 	int				rra;
 	int				rrb;
+	int				total_cost;
 }					t_cost;
 
 // typedef struct s_costs
 // {
 // 	t_cost			*costs;
-// }					t_costs;
+// }				t_costs;
 
 typedef struct s_stack
 {
@@ -101,6 +102,7 @@ void	turk_sort(t_stack *a, t_stack *b);
 void	bring_max_top(t_stack *stack);
 void	b_cheaper(t_stack *a, t_stack *b, int cost);
 int		get_min(t_stack *stack);
+void	get_total_cost(t_cost **cost, int i);
 
 
 

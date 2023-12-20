@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:23:31 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/19 18:31:50 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/20 20:13:06 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ int	which_rotate(t_stack *a, int index)
 	return (0);
 }
 
+// void	init_cost(t_cost **cost, int i)
+// {
+// 	(*cost)[i].ra = 0;
+// 	(*cost)[i].rb = 0;
+// 	(*cost)[i].rra = 0;
+// 	(*cost)[i].rrb = 0;
+// }
 
 void	get_cost(t_stack *a, t_stack *b, t_cost **cost)
 {
@@ -50,31 +57,90 @@ void	get_cost(t_stack *a, t_stack *b, t_cost **cost)
 	i = 0;
 	bi = b->size - 1;
 
-	while (i < a->size && bi > 0)
+	while (i < a->size)
 	{
-		bi = b->size - 1;
-		while (bi > 0 && a->array[i] > b->array[bi])
+		if (a->array[i] > get_max(b) || a->array[i] < get_min(b))
 		{
-			cost[i]->rrb++;
-			bi--;
+			(*cost)[i].ra = i;
 		}
-		cost[i]->ra = i;
-		if (cost[i]->rrb > b->size / 2)
+		else
 		{
-			cost[i]->rb = b->size - cost[i]->rrb;
-			cost[i]->rrb = 0;
+			bi = b->size - 1;
+			while (bi > 0 && a->array[i] > b->array[bi])
+			{
+				(*cost)[i].rrb++;
+				bi--;
+			}
+			(*cost)[i].ra = i;
+			if ((*cost)[i].rrb > b->size / 2)
+			{
+				(*cost)[i].rb = b->size - (*cost)[i].rrb;
+				(*cost)[i].rrb = 0;
+			}
 		}
-		cost[i]->ra = i;
+		if ((*cost)[i].ra > a->size / 2)
+		{
+			(*cost)[i].rra = a->size - (*cost)[i].ra;
+			(*cost)[i].ra = 0;
+		}
+		get_total_cost(cost, i);
 		i++;
 	}
-	// cost[i]->ra = i;
-	// PRINTSTACK;
 }
+
+int	get_min_nbr(int a, int b)
+{
+	if (a > b)
+		return (b);
+	else
+		return (a);
+}
+
+void	get_total_cost(t_cost **cost, int i)
+{
+	int	rr;
+	int	rrr;
+	int ra;
+	int rb;
+	int rra;
+	int rrb;
+
+	rr = 0;
+	rrr = 0;
+	ra = 0;
+	rb = 0;
+	rra = 0;
+	rrb = 0;
+
+	if ((*cost)[i].ra > 0 && (*cost)[i].rb > 0)
+	{
+		rr = get_min_nbr((*cost)[i].ra, (*cost)[i].rb);
+	}
+	else if ((*cost)[i].rra > 0 && (*cost)[i].rrb > 0)
+	{
+		rrr = get_min_nbr((*cost)[i].rra, (*cost)[i].rrb);
+	}
+
+	if ((*cost)[i].ra > (*cost)[i].rb)
+		ra = (*cost)[i].ra - (*cost)[i].rb;
+	else
+		rb = (*cost)[i].rb - (*cost)[i].ra;
+	if ((*cost)[i].rra > (*cost)[i].rrb)
+		ra = (*cost)[i].rra - (*cost)[i].rrb;
+	else
+		rrb = (*cost)[i].rrb - (*cost)[i].rra;
+
+	(*cost)[i].total_cost = rr + rrr + ra + rb + rrb + rra;
+
+	// printf("ra: %d rb: %d rra: %d rrb: %d rr: %d rrr: %d\n", ra, rb, rra, rrb, rr, rrr);
+}
+
 
 
 void	sort(t_stack *a, t_stack *b)
 {
 	t_cost *cost;
+
 
 	cost = malloc(sizeof(t_cost) * a->size);
 
@@ -83,29 +149,50 @@ void	sort(t_stack *a, t_stack *b)
 	push(a, b, "pbbb");
 	push(a, b, "pbbb");
 	push(a, b, "pbbb");
+	push(a, b, "pbbb");
+	push(a, b, "pbbb");
+	push(a, b, "pbbb");
+	push(a, b, "pbbb");
+	push(a, b, "pbbb");
 
-	// PRINTSTACK;
+	PRINTSTACK;
+
+	int	cheapest;
 
 	int i = 0;
-	while (i < a->size)
+	while (i < 3)
 	{
-		if (a->array[i] > get_max(b))
+		if (a->array[0] > get_max(b))
+		{
 			push(a, b, "pb");
-		if (a->array[i] < get_min(b))
+			PRINTSTACK;
+		}
+		else if (a->array[0] < get_min(b))
 		{
 			push(a, b, "pb");
 			rotate(b, "rb");
+			PRINTSTACK;
 		}
 		else
 		{
-			PRINTSTACK;
 			get_cost(a, b, &cost);
-			PRINTSTACK;
+
+
+			cheapest = get_index_min_value(&cost, a);
+			
+
+
+
+
 
 
 			for (int i = 0; i < a->size; i++)
 			{
-				printf("\nra cost: %d\n rb cost: %d\nrra cost: %d\nrrb cost: %d\n\n",cost[i].ra, cost[i].rb, cost[i].rra, cost[i].rrb);
+				printf("cost index: %d	ra cost: %d\n", i, cost[i].ra);
+				printf("cost index: %d	rb cost: %d\n", i, cost[i].rb);
+				printf("cost index: %d	rra cost: %d\n", i, cost[i].rra);
+				printf("cost index: %d	rrb cost: %d\n", i, cost[i].rrb);
+				printf("cost index: %d	total cost: %d\n\n", i, cost[i].total_cost);
 			}
 		}
 		i++;
@@ -120,6 +207,21 @@ void	sort(t_stack *a, t_stack *b)
 }
 
 
+int	get_index_min_value(t_cost **cost, t_stack *a)
+{
+	int	i;
+	int	min;
+
+	min = INT_MAX;
+
+	i = -1;
+	while (++i < a->size)
+	{
+		if (cost[i]->total_cost < min)
+			min = cost[i]->total_cost;
+	}
+	return (i);
+}
 
 
 
