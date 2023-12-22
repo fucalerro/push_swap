@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 12:38:15 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/22 19:09:36 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/22 19:58:20 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ void	get_cost(t_stack *a, t_stack *b, t_cost **cost)
 	{
 		if (a->array[i] > get_max(b) || a->array[i] < get_min(b))
 		{
-			(*cost)[i].ra = i;
+			//this has a bug somehow
+			(*cost)[i].rrb = bring_max_cost;
+			printf("bring max cost: %d for i = %d\n", bring_max_cost, i);
 		}
 		else
 		{
@@ -79,19 +81,19 @@ void	get_cost(t_stack *a, t_stack *b, t_cost **cost)
 			// 	bi--;
 			// }
 
-			(*cost)[i].ra = i;
-			if ((*cost)[i].rb > b->size / 2)
-			{
-				(*cost)[i].rrb = b->size - (*cost)[i].rb;
-				(*cost)[i].rb = 0;
-			}
+		}
+		(*cost)[i].ra = i;
+		if ((*cost)[i].rb > b->size / 2)
+		{
+			(*cost)[i].rrb = b->size - (*cost)[i].rb;
+			(*cost)[i].rb = 0;
 		}
 		if ((*cost)[i].ra > a->size / 2)
 		{
 			(*cost)[i].rra = a->size - (*cost)[i].ra;
 			(*cost)[i].ra = 0;
 		}
-		get_total_cost(cost, i, bring_max_cost, b->size);
+		get_total_cost(cost, i);
 		i++;
 	}
 }
@@ -105,52 +107,48 @@ int	get_min_nbr(int a, int b)
 		return (a);
 }
 
-void	get_total_cost(t_cost **cost, int i, int bring_max_cost, int bsize)
+void	get_total_cost(t_cost **cost, int i)
 {
-	// (*cost)[i].rb += bring_max_cost;
-
-	printf("bring_max_cost::: %d\n", bring_max_cost);
-	if ((*cost)[i].rb > bsize / 2)
-	{
-		(*cost)[i].rrb = bsize - (*cost)[i].rb;
-		(*cost)[i].rb = 0;
-	}
-
-
 	(*cost)[i].total_cost = (*cost)[i].ra + (*cost)[i].rb + (*cost)[i].rra + (*cost)[i].rrb;
 }
 
 void	get_total_cost2(t_cost **cost, int i)
 {
-	(*cost)[i].final_rr = 0;
-	(*cost)[i].final_rrr = 0;
-	(*cost)[i].final_ra = 0;
-	(*cost)[i].final_rb = 0;
-	(*cost)[i].final_rra = 0;
-	(*cost)[i].final_rrb = 0;
+	(*cost)[i].rr = 0;
+	(*cost)[i].rrr = 0;
 
-	if ((*cost)[i].ra > 0 && (*cost)[i].rb > 0)
+
+	while ((*cost)[i].ra > 0 && (*cost)[i].rb > 0)
 	{
-		(*cost)[i].final_rr = get_min_nbr((*cost)[i].ra, (*cost)[i].rb);
+		(*cost)[i].ra--;
+		(*cost)[i].rb--;
+		(*cost)[i].rr++;
 	}
-	else if ((*cost)[i].rra > 0 && (*cost)[i].rrb > 0)
+	while ((*cost)[i].rra > 0 && (*cost)[i].rrb > 0)
 	{
-		(*cost)[i].final_rrr = get_min_nbr((*cost)[i].rra, (*cost)[i].rrb);
+		(*cost)[i].rra--;
+		(*cost)[i].rrb--;
+		(*cost)[i].rrr++;
 	}
 
-	if ((*cost)[i].ra > (*cost)[i].rb)
-		(*cost)[i].final_ra = (*cost)[i].ra - (*cost)[i].rb;
-	else
-		(*cost)[i].final_rb = (*cost)[i].rb - (*cost)[i].ra;
+	(*cost)[i].total_cost = (*cost)[i].rr + (*cost)[i].rrr + (*cost)[i].ra + (*cost)[i].rb + (*cost)[i].rrb + (*cost)[i].rra;
 
-	if ((*cost)[i].rra > (*cost)[i].rrb)
-		(*cost)[i].final_rra = (*cost)[i].rra - (*cost)[i].rrb;
-	else
-		(*cost)[i].final_rrb = (*cost)[i].rrb - (*cost)[i].rra;
-
-
-	(*cost)[i].total_cost = (*cost)[i].final_rr + (*cost)[i].final_rrr + (*cost)[i].final_ra + (*cost)[i].final_rb + (*cost)[i].final_rrb + (*cost)[i].final_rra;
-
+	// if ((*cost)[i].ra > 0 && (*cost)[i].rb > 0)
+	// {
+	// 	(*cost)[i].rr = get_min_nbr((*cost)[i].ra, (*cost)[i].rb);
+	// }
+	// else if ((*cost)[i].rra > 0 && (*cost)[i].rrb > 0)
+	// {
+	// 	(*cost)[i].rrr = get_min_nbr((*cost)[i].rra, (*cost)[i].rrb);
+	// }
+	// if ((*cost)[i].ra > (*cost)[i].rb)
+	// 	(*cost)[i].ra = (*cost)[i].ra - (*cost)[i].rb;
+	// else
+	// 	(*cost)[i].rb = (*cost)[i].rb - (*cost)[i].ra;
+	// if ((*cost)[i].rra > (*cost)[i].rrb)
+	// 	(*cost)[i].rra = (*cost)[i].rra - (*cost)[i].rrb;
+	// else
+	// 	(*cost)[i].rrb = (*cost)[i].rrb - (*cost)[i].rra;
 	// printf("ra: %d    rb: %d    rra: %d    rrb: %d    rr: %d    rrr: %d\n", (*cost)[i].final_ra, (*cost)[i].final_rb, (*cost)[i].final_rra, (*cost)[i].final_rrb, (*cost)[i].final_rr, (*cost)[i].final_rrr);
 }
 
@@ -166,6 +164,8 @@ void	reset_cost(t_cost **cost, t_stack *a)
 		(*cost)[i].rb = 0;
 		(*cost)[i].rra = 0;
 		(*cost)[i].rrb = 0;
+		(*cost)[i].rr = 0;
+		(*cost)[i].rrr = 0;
 		i++;
 	}
 }

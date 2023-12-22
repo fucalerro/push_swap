@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:23:31 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/22 19:09:35 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/22 19:40:15 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ void	sort(t_stack *a, t_stack *b)
 
 	while (a->size > 0)
 	{
-		// bring_max_top(b);
-		if (a->array[0] > get_max(b))
-		{
-			push(a, b, "pb");
-			PRINTSTACK;
-		}
-		else if (a->array[0] < get_min(b))
-		{
-			push(a, b, "pb");
-			rotate(b, "rb");
-			PRINTSTACK;
-		}
-		else
-		{
+		// // bring_max_top(b);
+		// if (a->array[0] > get_max(b))
+		// {
+		// 	push(a, b, "pb");
+		// 	PRINTSTACK;
+		// }
+		// else if (a->array[0] < get_min(b))
+		// {
+		// 	push(a, b, "pb");
+		// 	rotate(b, "rb");
+		// 	PRINTSTACK;
+		// }
+		// else
+		// {
 			get_cost(a, b, &cost);
 			cheapest_index = get_cheapest_index(a, &cost);
 			make_move(a, b, cost, cheapest_index);
@@ -48,11 +48,13 @@ void	sort(t_stack *a, t_stack *b)
 				printf("cost index: %d	ra cost: %d\n", i, cost[i].ra);
 				printf("cost index: %d	rb cost: %d\n", i, cost[i].rb);
 				printf("cost index: %d	rra cost: %d\n", i, cost[i].rra);
-				printf("cost index: %d	rrb cost: %d\n", i, cost[i].rrb);
-				printf("cost index: %d	total cost: %d\n\n", i, cost[i].total_cost);
+				printf("cost index: %d	rrb cost: %d\n\n", i, cost[i].rrb);
+			// 	printf("cost index: %d	rr cost: %d\n", i, cost[i].rr);
+			// 	printf("cost index: %d	rrr cost: %d\n", i, cost[i].rrr);
+			// 	printf("cost index: %d	total cost: %d\n\n", i, cost[i].total_cost);
 			}
 			reset_cost(&cost, a);
-		}
+		// }
 		i++;
 		PRINTSTACK;
 	}
