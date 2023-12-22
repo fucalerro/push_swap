@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:23:31 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/22 16:51:33 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/22 19:09:35 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	sort(t_stack *a, t_stack *b)
 		i++;
 		PRINTSTACK;
 	}
-		// bring_max_top(b);
+	bring_max_top(b);
 
 		while (b->size > 0)
 			push(b, a, "pa");

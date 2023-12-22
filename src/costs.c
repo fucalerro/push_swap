@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 12:38:15 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/22 17:02:24 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/22 19:09:36 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,38 @@ void	get_cost(t_stack *a, t_stack *b, t_cost **cost)
 		}
 		else
 		{
-			bi = b->size - 1;
-
-
-			while (bi > 0 && a->array[i] > b->array[bi])
+			bi = 0;
+			(*cost)[i].rb = 1;
+			while ((a->array[i] > b->array[bi] || a->array[i] < b->array[bi + 1]) && bi < b->size - 1)
 			{
-				(*cost)[i].rrb++;
-				bi--;
+				(*cost)[i].rb++;
+				bi++;
+			}
+			if (a->array[i] > b->array[0] && a->array[i] < b->array[b->size - 1])
+			{
+				(*cost)[i].rb = 0;
+
 			}
 
-			
+			// while (bi > 0)
+			// {
+			// 	if (bi == 1 && (a->array[i] < b->array[bi] && a->array[i] > b->array[b->size - 1]))
+			// 	{
+			// 		(*cost)[i].rrb++;
+			// 		// bi--;
+			// 	}
+			// 	else if (a->array[i] < b->array[bi] && a->array[i] > b->array[bi - 1])
+			// 	{
+			// 		(*cost)[i].rrb++;
+			// 	}
+			// 	bi--;
+			// }
+
 			(*cost)[i].ra = i;
-			if ((*cost)[i].rrb > b->size / 2)
+			if ((*cost)[i].rb > b->size / 2)
 			{
-				(*cost)[i].rb = b->size - (*cost)[i].rrb;
-				(*cost)[i].rrb = 0;
+				(*cost)[i].rrb = b->size - (*cost)[i].rb;
+				(*cost)[i].rb = 0;
 			}
 		}
 		if ((*cost)[i].ra > a->size / 2)
@@ -90,7 +107,7 @@ int	get_min_nbr(int a, int b)
 
 void	get_total_cost(t_cost **cost, int i, int bring_max_cost, int bsize)
 {
-	(*cost)[i].rb += bring_max_cost;
+	// (*cost)[i].rb += bring_max_cost;
 
 	printf("bring_max_cost::: %d\n", bring_max_cost);
 	if ((*cost)[i].rb > bsize / 2)
