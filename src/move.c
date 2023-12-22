@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 14:51:44 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/20 20:49:05 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/21 08:27:56 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	swap(t_stack *stack, char *str)
 		stack->array[1] = temp;
 	}
 	ft_printf("%s\n", str);
+
 }
 
 void	push(t_stack *from, t_stack *to, char *str)
@@ -66,7 +67,10 @@ void	rotate(t_stack *stack, char *str)
 		stack->array[1] = temp;
 	}
 	if (ft_strcmp(str, "rr") != 0 && ft_strcmp(str, "rrr") != 0)
+	{
 		ft_printf("%s\n", str);
+		//
+	}
 }
 
 void	rr(t_stack *a, t_stack *b, char *str)
@@ -76,12 +80,14 @@ void	rr(t_stack *a, t_stack *b, char *str)
 		rotate(a, "rr");
 		rotate(b, "rr");
 		printf("rr\n");
+
 	}
 	else if (ft_strcmp(str, "rrr") == 0)
 	{
 		rotate(a, "rrr");
 		rotate(b, "rrr");
 		ft_printf("rrr\n");
+
 	}
 }
 

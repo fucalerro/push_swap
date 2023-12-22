@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/20 20:44:43 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/22 16:45:33 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,11 @@ void	turk_sort(t_stack *a, t_stack *b);
 void	bring_max_top(t_stack *stack);
 void	b_cheaper(t_stack *a, t_stack *b, int cost);
 int		get_min(t_stack *stack);
-void	get_total_cost(t_cost **cost, int i);
-int		get_index_min_value(t_cost **cost, t_stack *a);
-void	make_move(t_stack *a, t_stack *b, t_cost *cost);
-
+void	get_total_cost(t_cost **cost, int i, int bring_max_cost, int bsize);
+int		get_cheapest_index(t_stack *a, t_cost **cost);
+void	make_move(t_stack *a, t_stack *b, t_cost *cost, int cheapest);
+void	get_cost(t_stack *a, t_stack *b, t_cost **cost);
+void	reset_cost(t_cost **cost, t_stack *a);
 
 
 #endif
