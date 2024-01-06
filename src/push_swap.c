@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:40:08 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/21 09:07:52 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/06 12:47:04 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ int	main(int argc, char *argv[])
 	b.size = 0;
 
 	change_to_index(&a);
-	// print_stacks(&a, &b	);
 	sort(&a, &b);
 
+	// print_stacks(&a, &b);
+
+	// free(a.array);
+	// free(b.array);
+	// free(argv);
 	return (0);
-
-
-
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/22 19:14:24 by lferro           ###   ########.fr       */
+/*   Updated: 2023/12/25 13:52:36 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ old prototypes
  */
 
 void	rotate(t_stack *stack, char *str);
-void	rr(t_stack *a, t_stack *b, char *str);
+// void	rr(t_stack *a, t_stack *b, char *str);
 void	push(t_stack *from, t_stack *to, char *str);
 void	swap(t_stack *stack, char *str);
 
@@ -98,10 +98,10 @@ void	stack_init(t_stack *a, char **argv, int size);
 // void	pb(t_stack *a, t_stack *b);
 // void	ra(t_stack *a);
 // void	rb(t_stack *b);
-// void	rr(t_stack *a, t_stack *b);
 // void	rra(t_stack *a);
 // void	rrb(t_stack *b);
-// void	rrr(t_stack *a, t_stack *b);
+void	rr(t_stack *a, t_stack *b);
+void	rrr(t_stack *a, t_stack *b);
 // void	radix_sort(t_stack *a, t_stack *b);
 void	change_to_index(t_stack *a);
 void	sort(t_stack *a, t_stack *b);

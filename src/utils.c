@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 12:54:49 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/20 20:44:39 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/06 12:47:10 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	change_to_index(t_stack *a)
 		a->array[i] = temp[i];
 		i++;
 	}
-	free(temp);
+	// free(temp);
 }
 
 /**
