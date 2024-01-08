@@ -6,35 +6,82 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:23:31 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/08 12:07:49 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/08 19:30:04 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	three_sort(t_stack *a)
+{
+	if (a->array[0] > a->array[1])
+		swap(a, "sa");
+	if (a->array[1] > a->array[2])
+		rotate(a, "rra");
+	if (a->array[0] > a->array[1])
+		swap(a, "sa");
+}
+
+
+void	five_sort(t_stack *a, t_stack *b)
+{
+	int small_index;
+	int	two;
+
+	two = 2;
+	while (two)
+	{
+		small_index = get_index(a, get_min(a));
+		while (small_index > 0)
+		{
+			// PRINTSTACK;
+			rotate(a, "rra");
+			small_index--;
+		}
+		// PRINTSTACK;
+		push(a, b, "pb");
+		two--;
+	}
+	// PRINTSTACK;
+	rotate(b, "rb");
+	three_sort(a);
+	push(b, a, "pa");
+	push(b, a, "pa");
+
+	while (a->array[0] != 0)
+	rotate(a, "ra");
+
+	// PRINTSTACK;
+}
+
 
 void	sort(t_stack *a, t_stack *b)
 {
 	t_cost	*cost;
 	int		cheapest_index;
 
-	cost = malloc(sizeof(t_cost) * a->size);
-	while (a->size > 0)
+
+	if (a->size == 3)
+		three_sort(a);
+	else if (a->size == 5)
+		five_sort(a, b);
+	else
 	{
-		// PRINTSTACK;
-		reset_cost(&cost, a);
-		get_cost(a, b, &cost);
-		cheapest_index = get_cheapest_index(a, &cost);
-
-		// printf("cheapest to bring up: %d\n", a->array[cheapest_index]);
-
-		make_move(a, b, cost, cheapest_index);
-		// PRINTSTACK;
+		push(a, b, "pb");
+		push(a, b, "pb");
+		cost = malloc(sizeof(t_cost) * a->size);
+		while (a->size > 0)
+		{
+			reset_cost(&cost, a);
+			get_cost(a, b, &cost);
+			cheapest_index = get_cheapest_index(a, &cost);
+			make_move(a, b, cost, cheapest_index);
+		}
+		bring_max_top(b);
+		while (b->size > 0)
+			push(b, a, "pa");
+		free(cost);
 	}
-
-	bring_max_top(b);
-	while (b->size > 0)
-		push(b, a, "pa");
-	free(cost);
 }
 
 int	get_cheapest_index(t_stack *a, t_cost **cost)

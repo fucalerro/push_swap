@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/08 16:04:23 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/08 18:38:12 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,9 @@ void	rotate(t_stack *stack, char *str);
 // void	rr(t_stack *a, t_stack *b, char *str);
 void	push(t_stack *from, t_stack *to, char *str);
 void	swap(t_stack *stack, char *str);
-void	freeyer(char ***argv);
-void	stack_init(t_stack *a, char ***argv, int size);
-// void	sa(t_stack *a);
-// void	sb(t_stack *b);
-// void	ss(t_stack *a, t_stack *b);
-// void	pa(t_stack *b, t_stack *a);
-// void	pb(t_stack *a, t_stack *b);
-// void	ra(t_stack *a);
-// void	rb(t_stack *b);
-// void	rra(t_stack *a);
-// void	rrb(t_stack *b);
+void	freeyer(char ***argv, int argc, t_stack *a, t_stack *b);
+int		stack_init(t_stack *a, char ***argv, int size);
+int		get_index(t_stack *stack, int value);
 void	rr(t_stack *a, t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
 // void	radix_sort(t_stack *a, t_stack *b);

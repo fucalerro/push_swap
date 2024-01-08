@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 18:40:08 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/08 16:36:36 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/08 18:38:16 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @param argv The arguments to initialize the stack with
  * @param size The size of the stack
  */
-void	stack_init(t_stack *a, char ***argv, int size)
+int	stack_init(t_stack *a, char ***argv, int size)
 {
 	int	i;
 
@@ -29,12 +29,14 @@ void	stack_init(t_stack *a, char ***argv, int size)
 	while ((*argv)[++i])
 		a->array[i] = ft_atol((*argv)[i]);
 	a->size = i;
+	return (0);
 }
 
 int	check_duplicate(char ***argv, int stacksize)
 {
 	int	i;
 	int	j;
+
 
 	i = 0;
 	while (i < stacksize)
@@ -51,13 +53,13 @@ int	check_duplicate(char ***argv, int stacksize)
 	return (0);
 }
 
-int	check_int(char ***argv, int stacksize)
+int	check_int(char ***argv)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < stacksize)
+	while ((*argv)[i])
 	{
 		j = 0;
 		if ((*argv)[i][0] == '-')
@@ -77,34 +79,58 @@ int	check_int(char ***argv, int stacksize)
 	return (0);
 }
 
-
-void	check_errors(char ***argv, int stacksize, int argc)
+int	check_maxint(const char ***argv, int stacksize)
 {
-
-	if (check_int(argv, stacksize) == -1)
+	int		i;
+	long	temp;
+	i = 0;
+	while (i < stacksize)
 	{
-		if (argc == 2)
-			freeyer(argv);
-		ft_printf("Error\nA number is not valid.\n  ");
-		exit(1);
+		temp = ft_atol((*argv)[i]);
+		if (temp > INT_MAX || temp < INT_MIN)
+			return (-1);
+		i++;
 	}
-	if (check_duplicate(argv, stacksize) == -1)
+	return (0);
+}
+
+
+void	check_errors(char ***argv, int argc, t_stack *a, t_stack *b)
+{
+	int	stacksize;
+	int	error;
+
+	stacksize = 0;
+	error = 0;
+	while ((*argv)[stacksize])
+		stacksize++;
+	if (check_int(argv) == -1
+		|| check_duplicate(argv, stacksize) == -1
+		|| check_maxint((const char ***)argv, stacksize) == -1)
+		error = 1;
+	if (error == 1)
 	{
+		printf("Error\n");
 		if (argc == 2)
-			freeyer(argv);
-		ft_printf("Error\nA number is duplicated.\n");
+			freeyer(argv, argc, a, b);
 		exit(1);
 	}
 }
 
-void	freeyer(char ***argv)
+void	freeyer(char ***argv, int argc, t_stack *a, t_stack *b)
 {
 	int	i;
 
 	i = -1;
-	while ((*argv)[++i])
-		free((*argv)[i]);
-	free((*argv));
+
+	if (argc == 2)
+	{
+		while ((*argv)[++i])
+			free((*argv)[i]);
+		free((*argv));
+	}
+	free(a->array);
+	free(b->array);
 }
 
 int	main(int argc, char *argv[])
@@ -122,16 +148,21 @@ int	main(int argc, char *argv[])
 	stacksize = 0;
 	while (argv[stacksize])
 		stacksize++;
-	check_errors(&argv, stacksize, argc);
+
+
+	check_errors(&argv, argc, &a, &b);
 	stack_init(&a, &argv, stacksize);
 	b.array = malloc(sizeof(int) * stacksize + 1);
 	b.size = 0;
 	change_to_index(&a);
+
+	if (is_sorted(&a))
+	{
+		freeyer(&argv, argc, &a, &b);
+		return (0);
+	}
 	sort(&a, &b);
-	free(a.array);
-	free(b.array);
-	if (argc == 2)
-		freeyer(&argv);
+	freeyer(&argv, argc, &a, &b);
 	return (0);
 }
 
