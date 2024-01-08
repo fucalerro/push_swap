@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 12:38:15 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/06 12:57:18 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/08 11:50:04 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,6 @@ void get_cost(t_stack *a, t_stack *b, t_cost **cost)
 			bi = b->size - 1;
 			bj = 0;
 			(*cost)[i].rb = 0;
-
-
-			// while (a->array[i] > b->array[bi] || a->array[i] < b->array[bj])
-			// {
-
-
-			// 	bj++;
-			// 	bi++;
-			// 	if (bj == b->size)
-			// 		bj = 0;
-			// 	if (bi == b->size)
-			// 		bi = 0;
-			// }
 
 			while ((*cost)[i].rb < b->size)
 			{
@@ -123,7 +110,6 @@ void get_total_cost(t_cost **cost, int i)
 {
 	(*cost)[i].rr = 0;
 	(*cost)[i].rrr = 0;
-
 	while ((*cost)[i].ra > 0 && (*cost)[i].rb > 0)
 	{
 		(*cost)[i].ra--;
@@ -136,8 +122,8 @@ void get_total_cost(t_cost **cost, int i)
 		(*cost)[i].rrb--;
 		(*cost)[i].rrr++;
 	}
-
-	(*cost)[i].total_cost = (*cost)[i].rr + (*cost)[i].rrr + (*cost)[i].ra + (*cost)[i].rb + (*cost)[i].rrb + (*cost)[i].rra;
+	(*cost)[i].total_cost = (*cost)[i].rr + (*cost)[i].rrr
+	+ (*cost)[i].ra + (*cost)[i].rb + (*cost)[i].rrb + (*cost)[i].rra;
 }
 
 void reset_cost(t_cost **cost, t_stack *a)

@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:23:31 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/06 12:47:16 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/08 12:07:49 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	sort(t_stack *a, t_stack *b)
 	bring_max_top(b);
 	while (b->size > 0)
 		push(b, a, "pa");
-	// free(cost);
+	free(cost);
 }
 
 int	get_cheapest_index(t_stack *a, t_cost **cost)

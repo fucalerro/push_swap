@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2023/12/25 13:52:36 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/08 16:04:23 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	rotate(t_stack *stack, char *str);
 // void	rr(t_stack *a, t_stack *b, char *str);
 void	push(t_stack *from, t_stack *to, char *str);
 void	swap(t_stack *stack, char *str);
-
-void	stack_init(t_stack *a, char **argv, int size);
+void	freeyer(char ***argv);
+void	stack_init(t_stack *a, char ***argv, int size);
 // void	sa(t_stack *a);
 // void	sb(t_stack *b);
 // void	ss(t_stack *a, t_stack *b);
