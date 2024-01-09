@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/08 18:38:12 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/09 09:36:50 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ int		is_sorted(t_stack *stack);
 /*
 old prototypes
  */
+
+void	three_sort(t_stack *a);
+void	five_sort_low(t_stack *a, t_stack *b, int small_index);
+void	five_sort_high(t_stack *a, t_stack *b, int small_index);
+void	five_sort(t_stack *a, t_stack *b);
 
 void	rotate(t_stack *stack, char *str);
 // void	rr(t_stack *a, t_stack *b, char *str);

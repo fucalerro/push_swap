@@ -6,54 +6,11 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:23:31 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/08 19:30:04 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/09 09:36:29 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	three_sort(t_stack *a)
-{
-	if (a->array[0] > a->array[1])
-		swap(a, "sa");
-	if (a->array[1] > a->array[2])
-		rotate(a, "rra");
-	if (a->array[0] > a->array[1])
-		swap(a, "sa");
-}
-
-
-void	five_sort(t_stack *a, t_stack *b)
-{
-	int small_index;
-	int	two;
-
-	two = 2;
-	while (two)
-	{
-		small_index = get_index(a, get_min(a));
-		while (small_index > 0)
-		{
-			// PRINTSTACK;
-			rotate(a, "rra");
-			small_index--;
-		}
-		// PRINTSTACK;
-		push(a, b, "pb");
-		two--;
-	}
-	// PRINTSTACK;
-	rotate(b, "rb");
-	three_sort(a);
-	push(b, a, "pa");
-	push(b, a, "pa");
-
-	while (a->array[0] != 0)
-	rotate(a, "ra");
-
-	// PRINTSTACK;
-}
-
 
 void	sort(t_stack *a, t_stack *b)
 {
