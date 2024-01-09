@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/09 09:36:50 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/09 10:12:14 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,24 @@
 --------------------------- includes ---------------------------
 */
 
-#ifndef PUSH_SWAP
-# define PUSH_SWAP
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-#  include "../libft/libft.h"
-#  include <fcntl.h>
-#  include <math.h>
-#  include <stdbool.h>
-#  include <stdio.h>
-#  include <stdlib.h>
-#  include <string.h>
-#  include <unistd.h>
-#  include <limits.h>
+# include "../libft/libft.h"
+# include <fcntl.h>
+# include <math.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <limits.h>
 
+# define REVERSE	1
+# define NORMAL	0
 
-#  define REVERSE	1
-#  define NORMAL	0
-
-#  define PRINTSTACK		(print_stacks(a, b))
-
-#  define PL		printf("file: %s line: %d\n", __FILE__, __LINE__)
+// #  define PRINTSTACK		(print_stacks(a, b))
+// #  define PL		printf("file: %s line: %d\n", __FILE__, __LINE__)
 
 /*
 --------------------------- structures ---------------------------
@@ -54,25 +52,13 @@ typedef struct s_cost
 	int				rr;
 	int				rrr;
 	int				total_cost;
-	// int				final_ra;
-	// int				final_rb;
-	// int				final_rra;
-	// int				final_rrb;
-	// int				final_rr;
-	// int				final_rrr;
 }					t_cost;
-
-// typedef struct s_costs
-// {
-// 	t_cost			*costs;
-// }				t_costs;
 
 typedef struct s_stack
 {
 	int				size;
 	int				*array;
 }					t_stack;
-
 
 /*
 -------------------------- prototypes --------------------------
@@ -81,14 +67,18 @@ typedef struct s_stack
 void	print_stacks(t_stack *a, t_stack *b);
 int		is_sorted(t_stack *stack);
 
-/*
-old prototypes
- */
-
 void	three_sort(t_stack *a);
 void	five_sort_low(t_stack *a, t_stack *b, int small_index);
 void	five_sort_high(t_stack *a, t_stack *b, int small_index);
 void	five_sort(t_stack *a, t_stack *b);
+void	optimize_rotate(t_cost **cost, int i, t_stack *a, t_stack *b);
+void	get_middle_cost(t_cost **cost, t_stack *a, t_stack *b, int i);
+int		bring_max_top_cost(t_stack *stack);
+
+int		check_duplicate(char ***argv, int stacksize);
+int		check_int(char ***argv);
+int		check_maxint(const char ***argv, int stacksize);
+void	check_errors(char ***argv, int argc, t_stack *a, t_stack *b);
 
 void	rotate(t_stack *stack, char *str);
 // void	rr(t_stack *a, t_stack *b, char *str);
@@ -112,6 +102,5 @@ int		get_cheapest_index(t_stack *a, t_cost **cost);
 void	make_move(t_stack *a, t_stack *b, t_cost *cost, int cheapest);
 void	get_cost(t_stack *a, t_stack *b, t_cost **cost);
 void	reset_cost(t_cost **cost, t_stack *a);
-
 
 #endif

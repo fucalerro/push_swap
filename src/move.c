@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 14:51:44 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/08 18:18:45 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/09 10:01:26 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ void	swap(t_stack *stack, char *str)
 		stack->array[1] = temp;
 	}
 	ft_printf("%s\n", str);
-
 }
 
 void	push(t_stack *from, t_stack *to, char *str)
 {
 	int	temp;
-	int		i;
+	int	i;
 
 	i = to->size;
 	while (--i >= 0)
@@ -45,7 +44,7 @@ void	push(t_stack *from, t_stack *to, char *str)
 
 void	rotate(t_stack *stack, char *str)
 {
-	int		i;
+	int	i;
 	int	temp;
 
 	if (ft_strlen(str) == 2)
@@ -69,7 +68,6 @@ void	rotate(t_stack *stack, char *str)
 	if (str[0] != 'x')
 	{
 		ft_printf("%s\n", str);
-
 	}
 }
 
@@ -84,7 +82,6 @@ void	rr(t_stack *a, t_stack *b)
 	while (++i < a->size)
 		a->array[i] = a->array[i + 1];
 	a->array[i] = temp;
-
 	temp = b->array[b->size];
 	b->array[b->size] = b->array[0];
 	i = -1;
@@ -105,7 +102,6 @@ void	rrr(t_stack *a, t_stack *b)
 	while (--i > 1)
 		a->array[i] = a->array[i - 1];
 	a->array[1] = temp;
-
 	temp = b->array[0];
 	b->array[0] = b->array[b->size - 1];
 	i = b->size;
@@ -114,26 +110,3 @@ void	rrr(t_stack *a, t_stack *b)
 	b->array[1] = temp;
 	ft_printf("rrr\n");
 }
-
-
-
-// void	rr(t_stack *a, t_stack *b, char *str)
-// {
-// 	if (ft_strcmp(str, "rr") == 0)
-// 	{
-// 		rotate(a, "xx");
-// 		rotate(b, "xx");
-// 		printf("rr\n");
-
-// 	}
-// 	else if (ft_strcmp(str, "rrr") == 0)
-// 	{
-// 		rotate(a, "xxx");
-// 		rotate(b, "xxx");
-// 		ft_printf("rrr\n");
-
-// 	}
-// }
-
-
-

@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 12:54:49 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/09 09:36:37 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/09 10:18:07 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	print_stacks(t_stack *a, t_stack *b)
 		else if (i >= b->size)
 			printf("%d: stackA:	%d		stackB:	-\n", i, a->array[i]);
 		else
-			printf("%d: stackA:	%d		stackB:	%d\n", i, a->array[i], b->array[i]);
+			printf("%d: stackA:	%d		stackB:	%d\n", i, a->array[i],
+				b->array[i]);
 		i++;
 	}
 	printf("   a_len: %d			b_len: %d\n", a->size, b->size);
@@ -64,19 +65,13 @@ void	change_to_index(t_stack *a)
 {
 	int	i;
 	int	j;
-
+	int	k;
 	int	*temp;
 
 	temp = malloc(sizeof(int) * a->size + 1);
-	int k = 0;
-	while (k < a->size)
-	{
+	k = -1;
+	while (++k < a->size)
 		temp[k] = 0;
-		k++;
-	}
-	// for (int i = 0; i < a->size; i++)
-	// 	printf("temp array: %d\n", temp[i]);
-
 	i = -1;
 	j = -1;
 	while (++i < a->size)
@@ -86,12 +81,9 @@ void	change_to_index(t_stack *a)
 				temp[i]++;
 		j = -1;
 	}
-	i = 0;
-		while (i < a->size)
-	{
+	i = -1;
+	while (++i < a->size)
 		a->array[i] = temp[i];
-		i++;
-	}
 	free(temp);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:32:05 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/09 09:36:19 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/09 10:19:16 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 void	three_sort(t_stack *a)
 {
-	if (a->array[0] > a->array[1])
+	if (a->size == 2)
 		swap(a, "sa");
-	if (a->array[1] > a->array[2])
-		rotate(a, "rra");
-	if (a->array[0] > a->array[1])
-		swap(a, "sa");
+	else if (a->size == 3)
+	{
+		if (a->array[0] > a->array[1])
+			swap(a, "sa");
+		if (a->array[1] > a->array[2])
+			rotate(a, "rra");
+		if (a->array[0] > a->array[1])
+			swap(a, "sa");
+	}
 }
 
 void	five_sort_low(t_stack *a, t_stack *b, int small_index)
@@ -44,7 +49,7 @@ void	five_sort_high(t_stack *a, t_stack *b, int small_index)
 
 void	five_sort(t_stack *a, t_stack *b)
 {
-	int small_index;
+	int	small_index;
 	int	two;
 
 	two = 2;

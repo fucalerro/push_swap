@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 16:23:31 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/09 09:36:29 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/09 10:20:04 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void	sort(t_stack *a, t_stack *b)
 	t_cost	*cost;
 	int		cheapest_index;
 
-
-	if (a->size == 3)
+	if (a->size <= 3)
 		three_sort(a);
 	else if (a->size == 5)
 		five_sort(a, b);
@@ -41,28 +40,9 @@ void	sort(t_stack *a, t_stack *b)
 	}
 }
 
-int	get_cheapest_index(t_stack *a, t_cost **cost)
-{
-	int	cheapest;
-	int	cheapest_index;
-	int	i;
-
-	i = -1;
-	cheapest = INT_MAX;
-	while (++i < a->size)
-		if ((*cost)[i].total_cost <= cheapest)
-		{
-			cheapest = (*cost)[i].total_cost;
-			cheapest_index = i;
-		}
-	return (cheapest_index);
-}
-
 void	make_move(t_stack *a, t_stack *b, t_cost *cost, int cheapest)
 {
-	t_cost temp_cost;
-
-
+	t_cost	temp_cost;
 
 	temp_cost.ra = cost[cheapest].ra;
 	temp_cost.rb = cost[cheapest].rb;
@@ -70,54 +50,19 @@ void	make_move(t_stack *a, t_stack *b, t_cost *cost, int cheapest)
 	temp_cost.rrb = cost[cheapest].rrb;
 	temp_cost.rr = cost[cheapest].rr;
 	temp_cost.rrr = cost[cheapest].rrr;
-
-	while (temp_cost.ra > 0)
-	{
+	while (temp_cost.ra-- > 0)
 		rotate(a, "ra");
-		temp_cost.ra--;
-	}
-	while (temp_cost.rb > 0)
-	{
+	while (temp_cost.rb-- > 0)
 		rotate(b, "rb");
-		temp_cost.rb--;
-	}
-	while (temp_cost.rra > 0)
-	{
+	while (temp_cost.rra-- > 0)
 		rotate(a, "rra");
-		temp_cost.rra--;
-	}
-	while (temp_cost.rrb > 0)
-	{
+	while (temp_cost.rrb-- > 0)
 		rotate(b, "rrb");
-		temp_cost.rrb--;
-	}
-	while (cost[cheapest].rr > 0)
-	{
+	while (cost[cheapest].rr-- > 0)
 		rr(a, b);
-		cost[cheapest].rr--;
-	}
-	while (cost[cheapest].rrr > 0)
-	{
+	while (cost[cheapest].rrr-- > 0)
 		rrr(a, b);
-		cost[cheapest].rrr--;
-	}
 	push(a, b, "pb");
-}
-
-int	get_index_min_value(t_cost **cost, t_stack *a)
-{
-	int	i;
-	int	min;
-
-	min = INT_MAX;
-
-	i = -1;
-	while (++i < a->size)
-	{
-		if ((*cost)[i].total_cost < min)
-			min = (*cost)[i].total_cost;
-	}
-	return (i);
 }
 
 void	b_cheaper(t_stack *a, t_stack *b, int cost)
@@ -153,7 +98,6 @@ void	bring_max_top(t_stack *stack)
 	int	max_index;
 
 	max = get_max(stack);
-
 	max_index = get_index(stack, max);
 	if (max_index < stack->size / 2)
 	{
