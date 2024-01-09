@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 11:14:14 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/09 15:04:39 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:25:39 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,25 +78,25 @@ void	checkator(t_stack *a, t_stack *b)
 	{
 		stuff = get_next_line(STDIN_FILENO);
 		if (stuff)
+		{
+			prog_exist = 1;
 			move_state = do_move(a, b, stuff);
+		}
 		free(stuff);
 		if (move_state == MOVE_ERROR)
 		{
-			ft_printf("Error\n");
+			ft_putstr_fd("Error\n", 2);
 			exit(0);
 		}
 		else if (move_state == MOVE_END)
-		{
-			prog_exist = 1;
 			break ;
-		}
 	}
 	check_printer(prog_exist, a, b);
 }
 
 void	check_printer(bool prog_exist, t_stack *a, t_stack *b)
 {
-	if (!prog_exist)
+	if (prog_exist == 0)
 		ft_putstr_fd("Error\n", 2);
 	else if (is_sorted(a) == 1 && is_empty(b) == 1)
 		ft_printf("OK\n");
