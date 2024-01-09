@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 12:54:49 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/09 10:18:07 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:04:14 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ void	print_stacks(t_stack *a, t_stack *b)
 	int	i;
 
 	i = 0;
-	printf("\n--------------- i --------------------- i\n");
+	ft_printf("\n--------------- i --------------------- i\n");
 	while (i < a->size || i < b->size)
 	{
 		if (i >= a->size)
-			printf("%d: stackA:	-		stackB:	%d\n", i, b->array[i]);
+			ft_printf("%d: stackA:	-		stackB:	%d\n", i, b->array[i]);
 		else if (i >= b->size)
-			printf("%d: stackA:	%d		stackB:	-\n", i, a->array[i]);
+			ft_printf("%d: stackA:	%d		stackB:	-\n", i, a->array[i]);
 		else
-			printf("%d: stackA:	%d		stackB:	%d\n", i, a->array[i],
+			ft_printf("%d: stackA:	%d		stackB:	%d\n", i, a->array[i],
 				b->array[i]);
 		i++;
 	}
-	printf("   a_len: %d			b_len: %d\n", a->size, b->size);
-	printf("END PRINT STACKS\n\n");
+	ft_printf("   a_len: %d			b_len: %d\n", a->size, b->size);
+	ft_printf("END PRINT STACKS\n\n");
 }
 
 /**

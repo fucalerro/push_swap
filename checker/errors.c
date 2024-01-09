@@ -6,11 +6,11 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:56:33 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/09 15:03:22 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:02:21 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 int	check_duplicate(char ***argv, int stacksize)
 {

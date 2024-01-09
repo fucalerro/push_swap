@@ -6,7 +6,7 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 13:19:01 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/09 10:12:14 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:03:33 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@
 
 # define REVERSE	1
 # define NORMAL	0
-
-// #  define PRINTSTACK		(print_stacks(a, b))
-// #  define PL		printf("file: %s line: %d\n", __FILE__, __LINE__)
 
 /*
 --------------------------- structures ---------------------------
@@ -80,13 +77,12 @@ int		check_int(char ***argv);
 int		check_maxint(const char ***argv, int stacksize);
 void	check_errors(char ***argv, int argc, t_stack *a, t_stack *b);
 
-void	rotate(t_stack *stack, char *str);
-// void	rr(t_stack *a, t_stack *b, char *str);
-void	push(t_stack *from, t_stack *to, char *str);
-void	swap(t_stack *stack, char *str);
 void	freeyer(char ***argv, int argc, t_stack *a, t_stack *b);
 int		stack_init(t_stack *a, char ***argv, int size);
 int		get_index(t_stack *stack, int value);
+void	rotate(t_stack *stack, char *str);
+void	push(t_stack *from, t_stack *to, char *str);
+void	swap(t_stack *stack, char *str);
 void	rr(t_stack *a, t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
 // void	radix_sort(t_stack *a, t_stack *b);

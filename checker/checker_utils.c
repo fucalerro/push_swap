@@ -1,24 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   checker_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 18:40:08 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/09 15:02:29 by lferro           ###   ########.fr       */
+/*   Created: 2024/01/09 11:35:35 by lferro            #+#    #+#             */
+/*   Updated: 2024/01/09 13:33:02 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
-/**
- * @brief Initialize the stack with the given arguments
- *
- * @param a The stack to initialize
- * @param argv The arguments to initialize the stack with
- * @param size The size of the stack
- */
 int	stack_init(t_stack *a, char ***argv, int size)
 {
 	int	i;
@@ -28,8 +21,18 @@ int	stack_init(t_stack *a, char ***argv, int size)
 	while ((*argv)[++i])
 		a->array[i] = ft_atol((*argv)[i]);
 	a->size = i;
-	change_to_index(a);
 	return (0);
+}
+
+int	is_sorted(t_stack *stack)
+{
+	int	i;
+
+	i = -1;
+	while (++i < stack->size - 1)
+		if (stack->array[i] > stack->array[i + 1])
+			return (false);
+	return (true);
 }
 
 void	freeyer(char ***argv, int argc, t_stack *a, t_stack *b)
@@ -45,33 +48,4 @@ void	freeyer(char ***argv, int argc, t_stack *a, t_stack *b)
 	}
 	free(a->array);
 	free(b->array);
-}
-
-int	main(int argc, char *argv[])
-{
-	t_stack	a;
-	t_stack	b;
-	int		stacksize;
-
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (1);
-	else if (argc == 2)
-		argv = ft_split(argv[1], ' ');
-	else if (argc > 2)
-		argv++;
-	stacksize = 0;
-	while (argv[stacksize])
-		stacksize++;
-	check_errors(&argv, argc, &a, &b);
-	stack_init(&a, &argv, stacksize);
-	b.array = malloc(sizeof(int) * stacksize + 1);
-	b.size = 0;
-	if (is_sorted(&a))
-	{
-		freeyer(&argv, argc, &a, &b);
-		return (0);
-	}
-	sort(&a, &b);
-	freeyer(&argv, argc, &a, &b);
-	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: lferro <lferro@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 14:51:44 by lferro            #+#    #+#             */
-/*   Updated: 2024/01/09 15:03:24 by lferro           ###   ########.fr       */
+/*   Updated: 2024/01/09 14:57:04 by lferro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 void	swap(t_stack *stack, char *str)
 {
@@ -22,7 +22,7 @@ void	swap(t_stack *stack, char *str)
 		stack->array[0] = stack->array[1];
 		stack->array[1] = temp;
 	}
-	ft_printf("%s\n", str);
+	str = NULL;
 }
 
 void	push(t_stack *from, t_stack *to, char *str)
@@ -38,7 +38,7 @@ void	push(t_stack *from, t_stack *to, char *str)
 		from->array[i] = from->array[i + 1];
 	from->size--;
 	to->size++;
-	ft_printf("%s\n", str);
+	str = NULL;
 }
 
 void	rotate(t_stack *stack, char *str)
@@ -66,7 +66,7 @@ void	rotate(t_stack *stack, char *str)
 	}
 	if (str[0] != 'x')
 	{
-		ft_printf("%s\n", str);
+		str = NULL;
 	}
 }
 
@@ -87,7 +87,6 @@ void	rr(t_stack *a, t_stack *b)
 	while (++i < b->size)
 		b->array[i] = b->array[i + 1];
 	b->array[i] = temp;
-	ft_printf("rr\n");
 }
 
 void	rrr(t_stack *a, t_stack *b)
@@ -107,5 +106,4 @@ void	rrr(t_stack *a, t_stack *b)
 	while (--i > 1)
 		b->array[i] = b->array[i - 1];
 	b->array[1] = temp;
-	ft_printf("rrr\n");
 }
